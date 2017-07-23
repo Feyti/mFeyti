@@ -1,0 +1,63 @@
+<?php
+
+//connection
+
+
+$host ='localhost';
+
+$user ='root';
+
+$password = '';
+
+$database ='testdb';
+
+
+
+
+
+// Create connection
+
+$conn = new mysqli($host, $user, $password,$database);
+
+
+
+// Check connection
+
+if ($conn->connect_error) {
+
+    die("Connection failed: " . $conn->connect_error);
+
+}
+
+//echo "Connected successfully";
+
+
+
+//recieve the database
+
+$sql = "SELECT * FROM drugs WHERE batch_number = '".$_GET["batch"]."'";
+
+$result = $conn->query($sql);
+
+
+//check the db for comparison
+
+
+
+if ($result->num_rows > 0) {
+
+    // output data of each row
+
+    while($row = $result->fetch_assoc()) {
+echo $row["nda"];
+    }
+
+} 
+
+$conn->close();
+
+
+
+//get result
+//send back response
+ ?>
